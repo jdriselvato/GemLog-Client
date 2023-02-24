@@ -4,10 +4,6 @@ import webbrowser
 import http.client
 from html import escape
 
-# Theme
-
-# sg.theme('DarkAmber')
-
 # Constants
 
 layout = [
@@ -66,10 +62,12 @@ def postNewContent(values):
     }
     conn.request("POST", "/post.php", payload, headers)
     res = conn.getresponse()
-    data = res.read()
 
-    print('------ DONE -------')
-    print(data.decode())
+    if res.status == 200:
+        clicked = sg.Popup(f'Success! View your post @ gemini://gemlog.blue/users/{username}', keep_on_top=True)
+        if clicked == 'OK':
+            webbrowser.open(f'https://portal.mozz.us/gemini/gemlog.blue/users/{username}')
+
 
 # Event Loop to process "events" and get the "values" of the inputs
 
