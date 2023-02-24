@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 import PySimpleGUI as sg
 import webbrowser
+import http.client
+from html import escape
 
 # Theme
 
@@ -10,7 +12,7 @@ import webbrowser
 
 layout = [
     [
-        sg.Text('title:', size =(15, 1), key='username'), sg.InputText(),
+        sg.Text('title:', size =(15, 1), key='title'), sg.InputText(),
     ],
     [
         sg.Text('Post content* (text/gemini format):'), # hint / tip text
@@ -19,12 +21,15 @@ layout = [
         sg.Multiline(size=(120, 40), key='textbox'),
     ],
     [
-        sg.Text('Username:', size =(9, 1), key='username'), sg.InputText(),
-        sg.Text('Password:', size =(9, 1), key='password'), sg.InputText(),
+        sg.Text('Username:', size =(9, 1), key='username'), sg.InputText("TestableClient"),
+        sg.Text('Password:', size =(9, 1), key='password'), sg.InputText("tegdun-6fybca-gukMat"),
         sg.Button('Post'), # hint button
     ],
     [
         sg.Text("Read more here: https://gemlog.blue", tooltip="https://gemlog.blue", enable_events=True, key=f'URL {"https://gemlog.blue"}')
+    ],
+    [
+        sg.Text("Gemini spec: https://gemini.circumlunar.space/docs/specification.gmi", tooltip="https://gemini.circumlunar.space/docs/specification.gmi", enable_events=True, key=f'URL {"https://gemini.circumlunar.space/docs/specification.gmi"}')
     ]
 ]
 
@@ -33,6 +38,38 @@ layout = [
 window = sg.Window('GemLog.blue Client - Add an entry to your gemlog', layout, return_keyboard_events=True, finalize=True)
 window.maximize()
 
+
+# Helpers
+
+def postNewContent(values):
+    print(values)
+    postTitle = escape(values[0])
+    postContent = escape(values['textbox'])
+    username = values[1]
+    password = values[2]
+
+    print(event, postTitle, postContent, username, password)
+
+    conn = http.client.HTTPSConnection("gemlog.blue")
+    payload = f'title={postTitle}&post={postContent}&gemloguser={username}&pw={password}'
+    headers = {
+      'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Origin': 'https://gemlog.blue',
+      'Content-Length': '2993',
+      'Accept-Language': 'en-US,en;q=0.9',
+      'Host': 'gemlog.blue',
+      'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.4 Safari/605.1.15',
+      'Referer': 'https://gemlog.blue/post.php',
+      'Accept-Encoding': 'gzip, deflate, br',
+      'Connection': 'keep-alive'
+    }
+    conn.request("POST", "/post.php", payload, headers)
+    res = conn.getresponse()
+    data = res.read()
+
+    print('------ DONE -------')
+    print(data.decode())
 
 # Event Loop to process "events" and get the "values" of the inputs
 
@@ -45,8 +82,5 @@ while True:
             url = event.split(' ')[1]
             webbrowser.open(url)
     elif event == 'Post':
-        postTitle = values['title']
-        postContent = values['textbox']
-        password = values['username']
-        password = values['password']
-        print(event, postContent, username, password)
+        postNewContent(values)
+
