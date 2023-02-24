@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 import PySimpleGUI as sg
-import tkinter as tk
 
 # Theme
 
@@ -27,7 +26,6 @@ layout = [
 
 window = sg.Window('GemLog.blue Client', layout, return_keyboard_events=True, finalize=True)
 window.maximize()
-canvas = window['canvas'].TKCanvas
 
 
 # Event Loop to process "events" and get the "values" of the inputs
