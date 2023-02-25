@@ -1,4 +1,4 @@
 
 # MacOS build
-pyinstaller -i ./extras/appIcon.png --windowed ./client.py --distpath ../releases/macOS/
+pyinstaller -i ./appIcon.png --add-data="appIcon.png:." --windowed ./client.py --distpath ../releases/macOS/ --workpath ./tmp;
 

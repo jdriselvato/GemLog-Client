@@ -4,19 +4,12 @@ import webbrowser
 import http.client
 import traceback # error handling
 import ssl
-import base64
+import base64 # icon image
 from html import escape
 from fake_useragent import UserAgent
+import sys
 
 # Constants
-
-col1=[
-    [sg.Image('./extras/appIcon_small.png')]
-]
-col2=[
-    [sg.Text("Create your account at: https://gemlog.blue", tooltip="https://gemlog.blue", enable_events=True, key=f'URL {"https://gemlog.blue"}')],
-    [sg.Text("Gemini spec: https://gemini.circumlunar.space/docs/specification.gmi", tooltip="https://gemini.circumlunar.space/docs/specification.gmi", enable_events=True, key=f'URL {"https://gemini.circumlunar.space/docs/specification.gmi"}')]
-]
 
 layout = [
     [
@@ -34,17 +27,27 @@ layout = [
         sg.Button('Post'), # hint button
     ],
     [
-        sg.Column(col1), 
-        sg.Column(col2)
+        [sg.Text("Create your account at: https://gemlog.blue", tooltip="https://gemlog.blue", enable_events=True, key=f'URL {"https://gemlog.blue"}')],
+        [sg.Text("Gemini spec: https://gemini.circumlunar.space/docs/specification.gmi", tooltip="https://gemini.circumlunar.space/docs/specification.gmi", enable_events=True, key=f'URL {"https://gemini.circumlunar.space/docs/specification.gmi"}')]
     ]
 ]
 
 # Create the Window
+def getIcon():
+    if getattr(sys, 'frozen', False):
+        icon = os.path.join(sys._MEIPASS, "appIcon.png")
+        return base64.b64encode(
+            open(icon, 'rb').read()
+        )
+    else:
+        return base64.b64encode(
+            open("appIcon.png", 'rb').read()
+        )
 
 window = sg.Window(
     'GemLog.blue Client - Add an entry to your gemlog', 
     layout, 
-    icon=base64.b64encode(open('./extras/appIcon.png', 'rb').read()),
+    icon=getIcon(),
     return_keyboard_events=True, 
     finalize=True
 )
