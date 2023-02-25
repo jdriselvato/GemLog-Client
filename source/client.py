@@ -84,9 +84,9 @@ def postNewContent(values):
 
     # Response
     res = conn.getresponse()
-    print("-----done-----")
-    data = res.read()
-    print(data.encode('utf-8').decode('unicode-escape'))
+    # print("-----done-----")
+    # data = res.read()
+    # print(data.encode('utf-8').decode('unicode-escape'))
 
     if res.status == 200:
         clicked = sg.Popup(f'Success! View your post @ gemini://gemlog.blue/users/{username}', keep_on_top=True)
