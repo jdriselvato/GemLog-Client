@@ -12,6 +12,7 @@ import webbrowser
 import http.client
 import traceback # error handling
 import ssl
+import base64 # app icon
 from html import escape
 ```
 
@@ -28,6 +29,6 @@ Building a stand alone app took a minute but I found pyinstaller was the easiest
 
 # Special thanks
 
-- Q for introducing me to Gemini
+- Q for introducing me to Gemini and app icon
 - Whoever made gemlog.blue
 - My wife for letting me working on this during the late hours of 02/24/2023

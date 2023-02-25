@@ -4,9 +4,18 @@ import webbrowser
 import http.client
 import traceback # error handling
 import ssl
+import base64
 from html import escape
 
 # Constants
+
+col1=[
+    [sg.Image('./extras/appIcon_small.png')]
+]
+col2=[
+    [sg.Text("Create your account at: https://gemlog.blue", tooltip="https://gemlog.blue", enable_events=True, key=f'URL {"https://gemlog.blue"}')],
+    [sg.Text("Gemini spec: https://gemini.circumlunar.space/docs/specification.gmi", tooltip="https://gemini.circumlunar.space/docs/specification.gmi", enable_events=True, key=f'URL {"https://gemini.circumlunar.space/docs/specification.gmi"}')]
+]
 
 layout = [
     [
@@ -24,10 +33,8 @@ layout = [
         sg.Button('Post'), # hint button
     ],
     [
-        sg.Text("Read more here: https://gemlog.blue", tooltip="https://gemlog.blue", enable_events=True, key=f'URL {"https://gemlog.blue"}')
-    ],
-    [
-        sg.Text("Gemini spec: https://gemini.circumlunar.space/docs/specification.gmi", tooltip="https://gemini.circumlunar.space/docs/specification.gmi", enable_events=True, key=f'URL {"https://gemini.circumlunar.space/docs/specification.gmi"}')
+        sg.Column(col1), 
+        sg.Column(col2)
     ]
 ]
 
@@ -36,7 +43,7 @@ layout = [
 window = sg.Window(
     'GemLog.blue Client - Add an entry to your gemlog', 
     layout, 
-    icon=base64.b64encode(open('./appIcon.png', 'rb').read()),
+    icon=base64.b64encode(open('./extras/appIcon.png', 'rb').read()),
     return_keyboard_events=True, 
     finalize=True
 )
