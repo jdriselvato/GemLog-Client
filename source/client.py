@@ -56,8 +56,6 @@ window.maximize()
 
 # Helpers
 
-
-
 def postNewContent(values):
     postTitle = escape(values[0]).encode('utf-8').decode('unicode-escape')
     postContent = escape(values['textbox']).encode('utf-8').decode('unicode-escape')
