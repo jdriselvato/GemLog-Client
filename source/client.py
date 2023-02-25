@@ -33,7 +33,13 @@ layout = [
 
 # Create the Window
 
-window = sg.Window('GemLog.blue Client - Add an entry to your gemlog', layout, return_keyboard_events=True, finalize=True)
+window = sg.Window(
+    'GemLog.blue Client - Add an entry to your gemlog', 
+    layout, 
+    icon=base64.b64encode(open('./appIcon.png', 'rb').read()),
+    return_keyboard_events=True, 
+    finalize=True
+)
 window.maximize()
 
 

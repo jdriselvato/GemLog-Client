@@ -20,7 +20,7 @@ from html import escape
 
 Building a stand alone app took a minute but I found pyinstaller was the easiest
 
-`pyinstaller --windowed client.py `
+`pyinstaller -i ./source/appIcon.png --windowed ./source/client.py`
 
 # About Gemini
 
