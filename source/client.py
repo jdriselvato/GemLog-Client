@@ -6,6 +6,7 @@ import traceback # error handling
 import ssl
 import base64
 from html import escape
+from fake_useragent import UserAgent
 
 # Constants
 
@@ -52,15 +53,19 @@ window.maximize()
 
 # Helpers
 
+
+
 def postNewContent(values):
-    print(values)
-    postTitle = escape(values[0])
-    postContent = escape(values['textbox'])
+    postTitle = escape(values[0]).encode('utf-8').decode('unicode-escape')
+    postContent = escape(values['textbox']).encode('utf-8').decode('unicode-escape')
     username = values[1]
     password = values[2]
-
     print(event, postTitle, postContent, username, password)
 
+    # user agent 
+    ua = UserAgent()
+
+    # Network call
     conn = http.client.HTTPSConnection("gemlog.blue", context = ssl._create_unverified_context())
     payload = f'title={postTitle}&post={postContent}&gemloguser={username}&pw={password}'
     headers = {
@@ -70,14 +75,15 @@ def postNewContent(values):
       'Content-Length': '2993',
       'Accept-Language': 'en-US,en;q=0.9',
       'Host': 'gemlog.blue',
-      'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.4 Safari/605.1.15',
+      'User-Agent': f'{ua.random}',
       'Referer': 'https://gemlog.blue/post.php',
       'Accept-Encoding': 'gzip, deflate, br',
       'Connection': 'keep-alive'
     }
     conn.request("POST", "/post.php", payload, headers)
-    res = conn.getresponse()
 
+    # Response
+    res = conn.getresponse()
     if res.status == 200:
         clicked = sg.Popup(f'Success! View your post @ gemini://gemlog.blue/users/{username}', keep_on_top=True)
         if clicked == 'OK':
@@ -88,7 +94,6 @@ def postNewContent(values):
 try:
     while True:
         event, values = window.read()
-        print(event)
         if event == sg.WIN_CLOSED:
             break
         elif event.startswith("URL "):
@@ -97,4 +102,5 @@ try:
         elif event == 'Post':
             postNewContent(values)
 except Exception as e:
+    print(e)
     sg.popup_error_with_traceback(f'An error happened.  Here is the info:', e)

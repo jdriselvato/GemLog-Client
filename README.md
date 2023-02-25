@@ -16,6 +16,8 @@ import base64 # app icon
 from html import escape
 ```
 
+I found running `python3 -m pip install` works the best on MacOS
+
 
 # Building app
 
