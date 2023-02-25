@@ -2,6 +2,8 @@
 import PySimpleGUI as sg
 import webbrowser
 import http.client
+import traceback # error handling
+import ssl
 from html import escape
 
 # Constants
@@ -46,7 +48,7 @@ def postNewContent(values):
 
     print(event, postTitle, postContent, username, password)
 
-    conn = http.client.HTTPSConnection("gemlog.blue")
+    conn = http.client.HTTPSConnection("gemlog.blue", context = ssl._create_unverified_context())
     payload = f'title={postTitle}&post={postContent}&gemloguser={username}&pw={password}'
     headers = {
       'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
@@ -70,15 +72,16 @@ def postNewContent(values):
 
 
 # Event Loop to process "events" and get the "values" of the inputs
-
-while True:
-    event, values = window.read()
-    print(event)
-    if event == sg.WIN_CLOSED:
-        break
-    elif event.startswith("URL "):
-            url = event.split(' ')[1]
-            webbrowser.open(url)
-    elif event == 'Post':
-        postNewContent(values)
-
+try:
+    while True:
+        event, values = window.read()
+        print(event)
+        if event == sg.WIN_CLOSED:
+            break
+        elif event.startswith("URL "):
+                url = event.split(' ')[1]
+                webbrowser.open(url)
+        elif event == 'Post':
+            postNewContent(values)
+except Exception as e:
+    sg.popup_error_with_traceback(f'An error happened.  Here is the info:', e)
