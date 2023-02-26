@@ -21,9 +21,9 @@ I found running `python3 -m pip install` works the best on MacOS
 
 # Building app
 
-Building a stand alone app took a minute but I found pyinstaller was the easiest
+### MacOS
 
-`pyinstaller -i ./source/appIcon.png --windowed ./source/client.py`
+`./source/build.sh`
 
 # About Gemini
 
