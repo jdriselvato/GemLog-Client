@@ -22,8 +22,8 @@ layout = [
         sg.Multiline(size=(120, 40), key='textbox'),
     ],
     [
-        sg.Text('Username:', size =(9, 1), key='username'), sg.InputText("TestableClient"),
-        sg.Text('Password:', size =(9, 1), key='password'), sg.InputText("tegdun-6fybca-gukMat"),
+        sg.Text('Email:', size =(9, 1), key='username'), sg.InputText("TestableClient"),
+        sg.Text('Password:', size =(9, 1), key='password'), sg.InputText("tegdun-6fybca-gukMat", password_char='*'),
         sg.Button('Post'), # hint button
     ],
     [
