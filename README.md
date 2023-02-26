@@ -25,6 +25,10 @@ I found running `python3 -m pip install` works the best on MacOS
 
 `./source/build.sh`
 
+# Screenshot
+
+<img width="517" alt="Screen Shot 2023-02-26 at 09 55 38" src="https://user-images.githubusercontent.com/950825/221418186-aec67d59-36bb-492c-bf3d-9a419f64492e.png">
+
 # About Gemini
 
 - [https://gemini.circumlunar.space/docs/specification.gmi](https://gemini.circumlunar.space/docs/specification.gmi)
