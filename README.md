@@ -6,24 +6,31 @@ Test directory: [gemini://gemlog.blue/users/TestableClient/](gemini://gemlog.blu
 
 # Python3 Requirements
 
-```
-import PySimpleGUI as sg
-import webbrowser
-import http.client
-import traceback # error handling
-import ssl
-import base64 # app icon
-from html import escape
-```
-
 I found running `python3 -m pip install` works the best on MacOS
+
+```
+python3 -m pip install pyinstaller
+python3 -m pip install fake_useragent
+python3 -m pip install PySimpleGUI
+```
 
 
 # Building app
 
-### MacOS
+### On MacOS
 
-`./source/build.sh`
+run `./source/build.sh`
+
+
+### On Linux (Alpine)
+
+```
+apk add python3
+apk add py3-pip
+apk add python3-tkinter # pip3 wouldn't install properly
+```
+
+run `./source/build_linux.sh` 
 
 # Screenshot
 
