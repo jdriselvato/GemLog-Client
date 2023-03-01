@@ -2,7 +2,7 @@
 
 A simple client to post to gemlog.blue
 
-Test directory: [gemini://gemlog.blue/users/TestableClient/](gemini://gemlog.blue/users/TestableClient/)
+Test directory: [gemini://gemlog.blue/users/TestableClient/](https://portal.mozz.us/gemini/gemlog.blue/users/TestableClient/)
 
 # Python3 Requirements
 
