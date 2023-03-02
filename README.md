@@ -12,6 +12,8 @@ I found running `python3 -m pip install` works the best on MacOS
 python3 -m pip install pyinstaller
 python3 -m pip install fake_useragent
 python3 -m pip install PySimpleGUI
+python3 -m pip install darkdetect # dark mode detection
+python3 -m pip install install darkdetect[macos-listener] # MacOS only
 ```
 
 
