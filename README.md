@@ -38,6 +38,14 @@ run `./source/build_linux.sh`
 
 <img width="881" alt="Screen Shot 2023-02-26 at 09 55 18" src="https://user-images.githubusercontent.com/950825/221418162-6cfbc8a7-1d6b-455e-8217-2a3dd72035b8.png">
 
+# Features
+
+- Posting to gem.blue with your own account (via HTTP)
+- Browsing the latest post in the built in mini-browser (native)
+- Browsing random posts from current `username`
+- HTTP browser viewing support via https://portal.mozz.us/gemini/
+- Light/Dark mode support (MacOS/Linux/Window)
+
 # About Gemini
 
 - [https://gemini.circumlunar.space/docs/specification.gmi](https://gemini.circumlunar.space/docs/specification.gmi)
