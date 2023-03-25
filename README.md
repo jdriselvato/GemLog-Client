@@ -36,7 +36,7 @@ run `./source/build_linux.sh`
 
 # Screenshot
 
-<img width="881" alt="GemLogBlue client v0.6" src="https://github.com/jdriselvato/GemLog-Client/blob/main/Screenshots/v0.6.png?raw=true">
+<img width="881" alt="GemLogBlue client v0.61" src="https://github.com/jdriselvato/GemLog-Client/blob/main/Screenshots/v0.61.png">
 
 # Features
 
